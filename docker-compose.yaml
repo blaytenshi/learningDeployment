@@ -1,0 +1,31 @@
+# this basically replaces 'docker run -p 3000:3000 -v /app/node_modules -v $(pwd):/app [imageId]'
+version: '3'
+services:
+  web:
+    build:
+      context: . # tells docker-compose to look in current directory...
+      dockerfile: Dockerfile.dev # for a file called Dockerfile.dev and use it to build the image
+    ports:
+      - "3000:3000" # port mappings from outside container to inside of running container
+    volumes:
+      - /app/node_modules # no : means do not create a reference to anything outside of this container, simply use the /app/node_modules inside the container
+      - .:/app # create a reference from the current folder outside the container (where the docker-compose.yaml file is) to /app inside the container
+  # the downside to this following approach is that you get
+  # all testing messages in the logging interace of the app
+  # and also you can't interact with the testing tool
+  # you also cannot use docker attach command to the running
+  # container to attach the process so you can interact with
+  # the testing tool. This is because attach attaches the i/o
+  # to the primary running process (in this case npm) and not
+  # to any sub process spawned from the primary process.
+  tests:
+    build:
+      contest: .
+      dockerfile: Dockerfile.dev
+    # no ports because we don't have to port over anything,
+    # its running tests only
+    volumes:
+      - /app/node_modules
+      - .:/app
+    # override starting command found in the Dockerfile.dev
+    command: ["npm", "run", "test"]

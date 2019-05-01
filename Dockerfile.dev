@@ -1,0 +1,14 @@
+FROM node:alpine
+
+WORKDIR '/app'
+
+COPY package.json .
+RUN npm install
+
+# Technically you could remove this because we've got volumes define din the docker-compose.yaml
+# We're leaving this in here as a kind of reference for when we need to create the production version of the Docker file
+# because when we create a production version of the app, we'll still need to copy the built files over to the
+# production container to be deployed.
+COPY . .
+
+CMD ["npm", "run",
