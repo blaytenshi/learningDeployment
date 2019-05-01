@@ -11,4 +11,4 @@ RUN npm install
 # production container to be deployed.
 COPY . .
 
-CMD ["npm", "run",
+CMD ["npm", "run", "start"]
