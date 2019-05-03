@@ -12,4 +12,4 @@ before_install:
 # we're using --coverage to ensure that the tests exit once completed, if we didn't run it with coverage, jest would hang there waiting for user input
 # if it exits with an exit code other than (0) then travis will assume the tests failed.
 script:
-  - docker run jimmygjtang/learning-deployment npm run test -- --coverage
+  - docker run -e CI=true jimmygjtang/learning-deployment npm run test
