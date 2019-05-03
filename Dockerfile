@@ -25,6 +25,8 @@ RUN npm run build
 # Run Phase #
 #############
 FROM nginx
+# typically doesn't do anything but AWS ElasticBeanstalk is going to read this EXPOSE command and actually create the port mapping for this
+EXPOSE 80
 
 # here we're referencing builder phase and going into the /app/build and copying it into the default folder where nginx serves the files
 COPY --from=builder /app/build /usr/share/nginx/html

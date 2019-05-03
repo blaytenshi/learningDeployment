@@ -18,10 +18,10 @@ script:
 deploy:
   provider: elasticbeanstalk # travis comes with a bunch of providers already such as aws, digitalocean, heroku(?)
   region: "us-east-2" # can find this value in the elastic beanstalk url. Must be wrapped in double quotes
-  app: "learning-development" # the same name as we created the application name
+  app: "learning-deployment" # the same name as we created the application name
   env: "LearningDeployment-env" # this is the value that is found after All Application > learning-deployment >
   bucket_name: "elasticbeanstalk-us-east-2-110555950416" # this is the S3 storage bucket where our app will be stored
-  bucker_path: "learning-development" # this is the folder path within the S3 storage in which the app will be stored, if this is a brand new application that hasn't been deployed yet, you won't find it in the AWS web interface. It will only show after first initial deploy
+  bucker_path: "learning-deployment" # this is the folder path within the S3 storage in which the app will be stored, if this is a brand new application that hasn't been deployed yet, you won't find it in the AWS web interface. It will only show after first initial deploy
   on:
     branch: master # tells travis to only deploy when master branch updates
   access_key_id: $AWS_ACCESS_KEY # aws access key that we defined as an environment variable in the build project in Travis CI web interface
