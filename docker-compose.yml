@@ -9,7 +9,7 @@ services:
       - "3000:3000" # port mappings from outside container to inside of running container
     volumes:
       - /app/node_modules # no : means do not create a reference to anything outside of this container, simply use the /app/node_modules inside the container
-      - .:/app # create a reference from the current folder outside the container (where the docker-compose.yaml file is) to /app inside the container
+      - .:/app # create a reference from the current folder outside the container (where the docker-compose.yml file is) to /app inside the container
   # the downside to this following approach is that you get
   # all testing messages in the logging interace of the app
   # and also you can't interact with the testing tool

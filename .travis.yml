@@ -1,0 +1,15 @@
+# this is the file that will be automatically detected by travis-ci to automatically build and deploy our solution
+# tells travis-ci that we need sudo level access because we're making use of docker
+sudo: required
+# tells travis-ci to install docker into it's container
+services:
+  - docker
+# has a series of different commands that will get executed before the tests are run
+# here we're telling docker to build the docker image using Dockerfile.dev and tag it
+before_install:
+  - docker build -t jimmygjtang/learningDeployment -f Dockerfile.dev .
+# telling docker to run the test suite
+# we're using --coverage to ensure that the tests exit once completed, if we didn't run it with coverage, jest would hang there waiting for user input
+# if it exits with an exit code other than (0) then travis will assume the tests failed.
+script:
+  - docker run jimmygjtang/learningDeployment npm run test -- --coverage
