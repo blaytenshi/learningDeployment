@@ -7,9 +7,9 @@ services:
 # has a series of different commands that will get executed before the tests are run
 # here we're telling docker to build the docker image using Dockerfile.dev and tag it
 before_install:
-  - docker build -t jimmygjtang/learningDeployment -f Dockerfile.dev .
+  - docker build -t jimmygjtang/learning-deployment -f Dockerfile.dev .
 # telling docker to run the test suite
 # we're using --coverage to ensure that the tests exit once completed, if we didn't run it with coverage, jest would hang there waiting for user input
 # if it exits with an exit code other than (0) then travis will assume the tests failed.
 script:
-  - docker run jimmygjtang/learningDeployment npm run test -- --coverage
+  - docker run jimmygjtang/learning-deployment npm run test -- --coverage
